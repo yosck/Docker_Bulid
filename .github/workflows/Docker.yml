@@ -1,0 +1,31 @@
+name: Build and Push Docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t ghcr.io/${{ github.repository_owner }}/inotifyrclone2:latest .
+
+  push:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: List Docker images
+        run: docker images
+
+      - name: Log in to ghcr.io
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push Docker image to ghcr.io
+        run: docker push ghcr.io/${{ github.repository_owner }}/inotifyrclone2:latest
