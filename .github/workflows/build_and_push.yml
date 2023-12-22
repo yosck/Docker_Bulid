@@ -22,4 +22,4 @@ jobs:
       - name: Log in to ghcr.io and push Docker image
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker push ghcr.io/your-ghcr-username/inotifyrclone:latest
+          docker push ghcr.io/ann426/inotifyrclone:latest
