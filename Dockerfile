@@ -7,7 +7,7 @@ RUN apk --no-cache add rclone inotify-tools curl
 WORKDIR /usr/local/bin
 
 # 複製脚本到容器中
-COPY rclone_inotify.sh .
+COPY rclone_inotify.sh /usr/local/bin/
 
 # 設定可執行權限
 RUN chmod +x rclone_inotify.sh
