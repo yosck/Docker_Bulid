@@ -9,6 +9,9 @@ RUN apt-get update && \
 # 複製脚本到容器中
 COPY rclone_inotify.sh /rclone_inotify.sh
 
+# 創建目錄
+RUN mkdir -p /date/ss /data/mtg
+
 # 設定可執行權限
 RUN chmod +x rclone_inotify.sh
 
