@@ -12,7 +12,7 @@ TELEGRAM_BOT_TOKEN="$BOT_TOKEN"
 TELEGRAM_CHAT_ID="$CHAT_ID"
 
 # 設定日誌文件
-LOG_FILE="/date/rclone_inotify.log"
+LOG_FILE="/data/rclone_inotify.log"
 
 # 函數用於發送Telegram通知
 send_telegram_notification() {
