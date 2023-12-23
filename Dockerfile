@@ -11,4 +11,4 @@ COPY rclone_inotify.sh /rclone_inotify.sh
 RUN chmod +x /rclone_inotify.sh
 
 # 設定執行腳本的入口點
-ENTRYPOINT ["/bin/bash", "/rclone_inotify.sh"]
+ENTRYPOINT ["/bin/sh", "/rclone_inotify.sh"]
