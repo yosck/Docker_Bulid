@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # 設定 Rclone 遠端和本地目錄
 REMOTE=$REMOTE
