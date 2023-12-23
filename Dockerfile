@@ -13,4 +13,4 @@ COPY rclone_inotify.sh /usr/local/bin/
 RUN chmod +x rclone_inotify.sh
 
 # 預設命令
-CMD ["./rclone_inotify.sh"]
+CMD ["/usr/local/bin/rclone_inotify.sh"]
