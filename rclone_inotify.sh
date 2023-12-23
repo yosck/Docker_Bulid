@@ -2,7 +2,6 @@
 
 # 設定 Rclone 遠端和本地目錄
 REMOTE="$REMOTE_NAME:$REMOTE_PATH"
-LOCAL_DIR="$LOCAL_PATH"
 
 # 設定 inotify 監聽的事件
 EVENTS="create,modify,delete,move"
@@ -28,11 +27,15 @@ log_message() {
 
 # 函數用於監聽事件
 watch_events() {
-    inotifywait -e "$EVENTS" -m -r --format '%w%f' "$LOCAL_DIR" |
-    while read -r FILE
+    for LOCAL_DIR in "$@"
     do
-        handle_event "$FILE"
+        inotifywait -e "$EVENTS" -m -r --format '%w%f' "$LOCAL_DIR" |
+        while read -r FILE
+        do
+            handle_event "$FILE"
+        done &
     done
+    wait
 }
 
 # 函數處理事件
@@ -48,5 +51,5 @@ handle_event() {
     fi
 }
 
-# 開始監聽事件
-watch_events
+# 開始監聽事件，可以傳入多個本地目錄路徑
+watch_events "$LOCAL_PATH1" "$LOCAL_PATH2" "$LOCAL_PATH3"
