@@ -12,7 +12,7 @@ TELEGRAM_BOT_TOKEN="$BOT_TOKEN"
 TELEGRAM_CHAT_ID="$CHAT_ID"
 
 # 設定日誌文件
-LOG_FILE="/data/rclone_inotify.log"
+LOG_FILE="/date/rclone_inotify.log"
 
 # 函數用於發送Telegram通知
 send_telegram_notification() {
@@ -26,23 +26,27 @@ log_message() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $message" >> "$LOG_FILE"
 }
 
-# 檢查本地目錄是否存在
-if [ ! -d "$LOCAL_DIR" ]; then
-  log_message "錯誤：本地目錄 '$LOCAL_DIR' 不存在"
-  exit 1
-fi
+# 函數用於監聽事件
+watch_events() {
+    inotifywait -e "$EVENTS" -m -r --format '%w%f' "$LOCAL_DIR" |
+    while read -r FILE
+    do
+        handle_event "$FILE"
+    done
+}
 
-# 使用 inotifywait 監視目錄變化，當有事件發生時執行 Rclone 同步
-inotifywait -e "$EVENTS" -m -r --format '%w%f' "$LOCAL_DIR" |
-while read -r FILE
-do
-  # 檢查文件是否存在，以避免同步不存在的文件
-  if [ -e "$FILE" ]; then
-    rclone sync "$FILE" "$REMOTE"
-    log_message "文件同步完成: $FILE"
-    send_telegram_notification "文件同步完成: $FILE"
-  else
-    log_message "警告：文件 '$FILE' 不存在，無法同步"
-    send_telegram_notification "警告：文件 '$FILE' 不存在，無法同步"
-  fi
-done
+# 函數處理事件
+handle_event() {
+    local FILE="$1"
+    if [ -e "$FILE" ]; then
+        rclone sync "$FILE" "$REMOTE"
+        log_message "文件同步完成: $FILE"
+        send_telegram_notification "文件同步完成: $FILE"
+    else
+        log_message "警告：文件 '$FILE' 不存在，無法同步"
+        send_telegram_notification "警告：文件 '$FILE' 不存在，無法同步"
+    fi
+}
+
+# 開始監聽事件
+watch_events
