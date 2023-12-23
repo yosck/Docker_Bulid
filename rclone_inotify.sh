@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # 設定 Rclone 遠端和本地目錄
-REMOTE=$REMOTE
+REMOTE="$REMOTE_NAME:$REMOTE_PATH"
 LOCAL_DIR=/data/inotify
 
 # 設定 inotify 監聽的事件
@@ -32,7 +32,7 @@ while read -r FILE
 do
   # 檢查文件是否存在，以避免同步不存在的文件
   if [ -e "$FILE" ]; then
-    rclone sync -vP "$FILE" "$REMOTE"
+    rclone sync -vP "$FILE" "$REMOTE_NAME:$REMOTE_PATH"
     log_message "文件同步完成: $FILE"
     send_telegram_notification "文件同步完成: $FILE"
   else
