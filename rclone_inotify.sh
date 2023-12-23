@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 設定 Rclone 遠端和本地目錄
-REMOTE="$REMOTE"
+REMOTE=$REMOTE
 LOCAL_DIR=/data/inotify
 
 # 設定 inotify 監聽的事件
@@ -25,12 +25,6 @@ log_message() {
     local message="$1"
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $message" >> "$LOG_FILE"
 }
-
-# 檢查本地目錄是否存在
-if [ ! -d "$LOCAL_DIR" ]; then
-  log_message "錯誤：本地目錄 '$LOCAL_DIR' 不存在"
-  exit 1
-fi
 
 # 使用 inotifywait 監視目錄變化，當有事件發生時執行 Rclone 同步
 inotifywait -e "$EVENTS" -m -r --format '%w%f' "$LOCAL_DIR" |
