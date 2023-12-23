@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 設定 Rclone 遠端和本地目錄
-REMOTE="$REMOTE_NAME:$REMOTE_PATH"
+REMOTE="$REMOTE"
 LOCAL_DIR=/data/inotify
 
 # 設定 inotify 監聽的事件
@@ -12,7 +12,7 @@ TELEGRAM_BOT_TOKEN="$BOT_TOKEN"
 TELEGRAM_CHAT_ID="$CHAT_ID"
 
 # 設定日誌文件
-LOG_FILE="/date/rclone_inotify.log"
+LOG_FILE="/data/rclone_inotify.log"
 
 # 函數用於發送Telegram通知
 send_telegram_notification() {
@@ -38,7 +38,7 @@ while read -r FILE
 do
   # 檢查文件是否存在，以避免同步不存在的文件
   if [ -e "$FILE" ]; then
-    rclone sync "$FILE" "$REMOTE"
+    rclone sync -vP "$FILE" "$REMOTE"
     log_message "文件同步完成: $FILE"
     send_telegram_notification "文件同步完成: $FILE"
   else
