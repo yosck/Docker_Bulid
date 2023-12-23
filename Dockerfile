@@ -1,8 +1,11 @@
-FROM alpine:latest
+# 使用基本的 Ubuntu 鏡像
+FROM ubuntu:latest
 
-# 安裝所需的軟體
-RUN apk --no-cache add rclone inotify-tools curl
-
+# 安裝需要的套件
+RUN apt-get update && \
+    apt-get install -y rclone inotify-tools && \
+    rm -rf /var/lib/apt/lists/*
+    
 # 設定工作目錄
 WORKDIR /usr/local/bin
 
@@ -13,4 +16,4 @@ COPY rclone_inotify.sh /usr/local/bin/
 RUN chmod +x rclone_inotify.sh
 
 # 預設命令
-ENTRYPOINT ["/bin/bash", /rclone_inotify.sh"]
+CMD ["./rclone_inotify.sh"]
