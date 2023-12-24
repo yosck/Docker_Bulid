@@ -36,7 +36,7 @@ jobs:
       env:
         DOCKER_CLI_EXPERIMENTAL: enabled
 
-    - name: Build and push Docker image watchexec
+    - name: Build and push Docker image rclone_watchexec
       run: |
         DOCKER_IMAGE_B="ghcr.io/${{ github.repository_owner }}/rclone_watchexec:latest"
         docker buildx prune --all
