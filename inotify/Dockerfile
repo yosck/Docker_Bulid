@@ -8,6 +8,9 @@ ENV RCLONE_REMOTE="remote:dir"
 # 安裝所需軟體
 RUN apk --update add inotify-tools rclone && rm -rf /var/cache/apk/*
 
+# 創建應用程式目錄
+RUN mkdir -p /usr/src/app
+
 # 複製腳本到容器中
 COPY inotify/inotify.sh /usr/src/app/inotify.sh
 
