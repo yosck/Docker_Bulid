@@ -55,3 +55,13 @@ jobs:
 
       env:
         DOCKER_CLI_EXPERIMENTAL: enabled
+
+    - name: Build and push Docker image rclone_entr
+      run: |
+        DOCKER_IMAGE_D="ghcr.io/${{ github.repository_owner }}/rclone_entr:latest"
+        docker buildx prune --all
+        docker buildx create --use
+        docker buildx build -f rclone_entr/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_D --push .
+
+      env:
+        DOCKER_CLI_EXPERIMENTAL: enabled
