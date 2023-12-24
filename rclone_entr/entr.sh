@@ -5,6 +5,8 @@ echo "Using RCLONE_REMOTE: $RCLONE_REMOTE"
 echo "Using RCLONE_CONFIG: $RCLONE_CONFIG"
 echo "Using WATCH_FOLDER: $WATCH_FOLDER"
 
+# 定義日誌文件路徑
+LOG_FILE="/data/entr.log"
 
-# 最後，使用環境變數執行 rclone 命令
-find $WATCH_FOLDER | entr -r rclone sync -vP $WATCH_FOLDER $RCLONE_REMOTE -f $RCLONE_CONFIG
+# 最後，使用環境變數執行 rclone 命令，並將輸出附加到日誌文件
+find $WATCH_FOLDER | entr -r rclone sync -vP $WATCH_FOLDER $RCLONE_REMOTE -f $RCLONE_CONFIG >> $LOG_FILE 2>&1
