@@ -14,5 +14,8 @@ COPY inotify/inotify.sh /usr/src/app/inotify.sh
 # 設置工作目錄
 WORKDIR /usr/src/app
 
+# 為腳本添加執行權限
+RUN chmod +x inotify.sh
+
 # 使用ENTRYPOINT來執行腳本
 ENTRYPOINT ["./inotify.sh"]
