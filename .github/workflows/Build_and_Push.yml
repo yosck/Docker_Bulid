@@ -26,12 +26,12 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GHCR_PAT }}
 
-    - name: Build and push Docker image rclone_fsnotify
+    - name: Build and push Docker image inotify
       run: |
-        DOCKER_IMAGE_E="ghcr.io/${{ github.repository_owner }}/rclone_fsnotify:latest"
+        DOCKER_IMAGE_E="ghcr.io/${{ github.repository_owner }}/inotify:latest"
         docker buildx prune --all
         docker buildx create --use
-        docker buildx build -f rclone_fsnotify/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_E --push .
+        docker buildx build -f inotify/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_E --push .
 
       env:
         DOCKER_CLI_EXPERIMENTAL: enabled
