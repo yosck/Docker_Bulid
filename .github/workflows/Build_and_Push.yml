@@ -26,36 +26,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GHCR_PAT }}
 
-    - name: Build and push Docker rclone_inotify
-      run: |
-        DOCKER_IMAGE_A="ghcr.io/${{ github.repository_owner }}/rclone_inotify:latest"
-        docker buildx prune --all
-        docker buildx create --use
-        docker buildx build -f rclone_inotify/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_A --push .
-
-      env:
-        DOCKER_CLI_EXPERIMENTAL: enabled
-
-    - name: Build and push Docker image rclone_watchexec
-      run: |
-        DOCKER_IMAGE_B="ghcr.io/${{ github.repository_owner }}/rclone_watchexec:latest"
-        docker buildx prune --all
-        docker buildx create --use
-        docker buildx build -f rclone_watchexec/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_B --push .
-
-      env:
-        DOCKER_CLI_EXPERIMENTAL: enabled
-
-#    - name: Build and push Docker image rclone_watchman
-#      run: |
-#        DOCKER_IMAGE_C="ghcr.io/${{ github.repository_owner }}/rclone_watchman:latest"
-#        docker buildx prune --all
-#        docker buildx create --use
-#        docker buildx build -f rclone_watchman/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_C --push .
-
-#      env:
-#        DOCKER_CLI_EXPERIMENTAL: enabled
-
     - name: Build and push Docker image rclone_entr
       run: |
         DOCKER_IMAGE_D="ghcr.io/${{ github.repository_owner }}/rclone_entr:latest"
