@@ -1,13 +1,15 @@
-# 使用 Alpine Linux 作為基本映像
-FROM alpine:latest
+# 使用 Debian 作為基本映像
+FROM debian:latest
 
 # 設定環境變數，您可以根據需要添加其他環境變數
 ENV LOCAL_PATH /data/watch
 ENV REMOTE_PATH REMOTE:DIR
 
 # 安裝 fswatch 和 rclone，這可能需要根據您的需求進行修改
-RUN apk --no-cache add fswatch \
-    && apk --no-cache add rclone
+RUN apt-get update && apt-get install -y \
+    fswatch \
+    rclone \
+    && rm -rf /var/lib/apt/lists/*
 
 # 設定工作目錄
 WORKDIR /app
