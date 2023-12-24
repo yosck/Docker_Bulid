@@ -8,17 +8,11 @@ ENV RCLONE_REMOTE="remote:dir"
 # 安裝所需軟體
 RUN apk --update add inotify-tools rclone && rm -rf /var/cache/apk/*
 
-# 創建應用程式目錄
-RUN mkdir -p /usr/src/app
-
 # 複製腳本到容器中
 COPY inotify/inotify.sh /usr/src/app/inotify.sh
 
-# 設置工作目錄
-WORKDIR /usr/src/app
-
 # 為腳本添加執行權限
-RUN chmod +x inotify.sh
+RUN chmod +x /usr/src/app/inotify.sh
 
 # 使用ENTRYPOINT來執行腳本
-ENTRYPOINT ["./inotify.sh"]
+ENTRYPOINT ["/usr/src/app/inotify.sh"]
