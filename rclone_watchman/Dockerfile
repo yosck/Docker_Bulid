@@ -1,5 +1,8 @@
 FROM alpine:latest
 
+# 添加 community 存儲庫
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/apk/repositories
+
 # 安裝 watchman
 RUN apk --no-cache add watchman
 
