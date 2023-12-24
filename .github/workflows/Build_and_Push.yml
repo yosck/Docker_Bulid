@@ -41,7 +41,7 @@ jobs:
         DOCKER_IMAGE_B="ghcr.io/${{ github.repository_owner }}/rclone_watchexec:latest"
         docker buildx prune --all
         docker buildx create --use
-        docker buildx build -f watchexec/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_B --push .
+        docker buildx build -f rclone_watchexec/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_B --push .
 
       env:
         DOCKER_CLI_EXPERIMENTAL: enabled
