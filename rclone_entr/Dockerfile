@@ -4,7 +4,7 @@ FROM alpine:latest
 RUN apk --no-cache add rclone entr
 
 # 複製腳本到容器
-COPY /rclone_entr/entr.sh /usr/bin/entr.sh
+COPY rclone_entr/entr.sh /usr/bin/entr.sh
 
 # 設置腳本為可執行
 RUN chmod +x /usr/bin/entr.sh
