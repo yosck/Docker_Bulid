@@ -7,6 +7,9 @@ WORKDIR /app
 # 安裝所需套件
 RUN pip install watchdog
 
+# 安裝 rclone
+RUN curl https://rclone.org/install.sh | bash
+
 # 複製腳本到容器中
 COPY inotify_python/watcher.py .
 
