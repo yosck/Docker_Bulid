@@ -10,5 +10,8 @@ RUN gem install rb-inotify
 # 複製腳本到容器中
 COPY inotify_ruby/ruby.rb .
 
+# 添加執行權限
+RUN chmod +x ruby.rb
+
 # 使用ENTRYPOINT來執行腳本
 ENTRYPOINT ["ruby", "./ruby.rb"]
