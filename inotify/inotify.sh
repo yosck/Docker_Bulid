@@ -8,5 +8,6 @@ RCLONE_REMOTE="${RCLONE_REMOTE:-remote:dir}"
 inotifywait -m -r -e create,modify,delete,move "$WATCH_FOLDER" |
 while read path action file; do
     echo "File $file has been $action"
-    rclone sync --config=/data/rclone.conf -vP "$WATCH_FOLDER" "$RCLONE_REMOTE"
+    # 執行 rclone.sh
+    ./rclone.sh
 done
