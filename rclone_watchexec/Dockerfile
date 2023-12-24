@@ -8,4 +8,4 @@ RUN apk --no-cache add watchexec \
     && rm -r rclone-*
 
 # 設置默認命令
-ENTRYPOINT ["/bin/sh", "-c", "watchexec -r -c 'rclone sync -f /data/rclone.conf -vP ${WATCH_SOURCE:-/data/watchexec} $RCLONE_REMOTE'"]
+ENTRYPOINT ["/bin/sh", "-c", "watchexec -r -c 'rclone sync -f /data/rclone.conf -vP ${WATCH_SOURCE:-/data/watchexec} $RCLONE_REMOTE' --clear clear"]
