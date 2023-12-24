@@ -13,7 +13,7 @@ RUN apk --no-cache add fswatch \
 WORKDIR /app
 
 # 添加監視和同步腳本
-COPY fswatch.sh /app/fswatch.sh
+COPY rclone_fswatch/fswatch.sh /app/fswatch.sh
 
 # 設置腳本可執行權限
 RUN chmod +x /app/fswatch.sh
