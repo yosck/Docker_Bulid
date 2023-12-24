@@ -8,10 +8,9 @@ RUN apt-get install -y watchman wget unzip && \
     wget https://downloads.rclone.org/rclone-current-linux-amd64.zip && \
     unzip rclone-current-linux-amd64.zip && \
     mv rclone-*-linux-amd64/rclone /usr/bin/ && \
-    rm -r rclone-* && \
-    rm rclone-current-linux-amd64.zip && \
+    rm -r rclone-*-linux-amd64/ && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* rclone-current-linux-amd64.zip
 
 # 定義環境變數
 ENV WATCH_SOURCE /data/watchman
