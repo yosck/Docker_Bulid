@@ -11,7 +11,6 @@ RUN chmod +x /usr/bin/entr.sh
 
 # 設置默認環境變數
 ENV RCLONE_REMOTE="remote:dir" \
-    RCLONE_CONFIG="/data/rclone.conf" \
     WATCH_FOLDER="/data/watch"
 
 # 設置 ENTRYPOINT
