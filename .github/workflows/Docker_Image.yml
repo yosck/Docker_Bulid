@@ -1,0 +1,37 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to ghcr.io with PAT
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GHCR_PAT }}
+
+    - name: Build and push Docker 
+      run: |
+        DOCKER_IMAGE="ghcr.io/${{ github.repository_owner }}/watchman:latest"
+        docker buildx prune --all
+        docker buildx create --use
+        docker buildx build -f watchman/Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE --push .
+
+      env:
+        DOCKER_CLI_EXPERIMENTAL: enabled
