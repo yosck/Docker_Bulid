@@ -20,4 +20,4 @@ COPY inotify/inotify.sh inotify/rclone.sh ./
 RUN chmod +x inotify.sh rclone.sh
 
 # 使用ENTRYPOINT來執行腳本
-ENTRYPOINT ["/inotify.sh"]
+ENTRYPOINT ["./inotify.sh"]
