@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # 使用環境變數
 WATCH_FOLDER="${WATCH_FOLDER:-/data/watch}"
