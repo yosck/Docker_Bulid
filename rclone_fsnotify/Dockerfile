@@ -5,7 +5,7 @@ FROM golang:latest
 WORKDIR /app
 
 # 複製本地程式碼到容器中的工作目錄
-COPY fsnotify/main.go /app
+COPY rclone_fsnotify/main.go /app
 
 # 編譯 Go 程序
 RUN go build -o main .
