@@ -13,10 +13,11 @@ ENV CONFIG_FILE="/data/rclone.conf"
 RUN apk --no-cache add watchexec rclone
 
 # 複製腳本到容器中
-COPY rclone_watchexec/sync.sh ./
+#COPY rclone_watchexec/sync.sh ./
 
 # 添加執行權限
-RUN chmod +x sync.sh
+#RUN chmod +x sync.sh
 
 # 使用ENTRYPOINT來執行腳本
-ENTRYPOINT ["watchexec", "./sync.sh"]
+#ENTRYPOINT ["watchexec", "./sync.sh"]
+CMD ["sh", "-c", "watchexec \"rclone sync --config $CONFIG_FILE -vP $WATCH_DIR $RCLONE_REMOTE\""]
