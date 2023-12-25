@@ -20,4 +20,5 @@ RUN apk --no-cache add watchexec rclone
 
 # 使用ENTRYPOINT來執行腳本
 #ENTRYPOINT ["watchexec", "./sync.sh"]
-CMD ["sh", "-c", "watchexec \"rclone sync --config $CONFIG_FILE --stats-one-line -vP $WATCH_DIR $RCLONE_REMOTE\""]
+#CMD ["sh", "-c", "watchexec \"rclone sync --config $CONFIG_FILE --stats-one-line -vP $WATCH_DIR $RCLONE_REMOTE\""]
+CMD ["sh", "-c", "watchexec 'rclone sync --config $CONFIG_FILE --stats-one-line -vP $WATCH_DIR $RCLONE_REMOTE'"]
