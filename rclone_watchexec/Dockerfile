@@ -13,4 +13,4 @@ ENV WATCH_DIR="/data/watch"
 ENV CONFIG_FILE="/data/rclone.conf"
 
 # 設置默認命令
-ENTRYPOINT ["/bin/ash", "-c", "watchexec -r 'rclone sync --config="$CONFIG_FILE" -vP ${WATCH_DIR:-/data/watch} $RCLONE_REMOTE'"]
+ENTRYPOINT ["watchexec -r 'rclone sync --config="$CONFIG_FILE" -vP ${WATCH_DIR:-/data/watch} $RCLONE_REMOTE'"]
