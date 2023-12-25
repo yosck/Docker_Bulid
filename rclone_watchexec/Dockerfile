@@ -19,4 +19,4 @@ COPY rclone_watchexec/sync.sh ./
 RUN chmod +x sync.sh
 
 # 使用ENTRYPOINT來執行腳本
-ENTRYPOINT ["./sync.sh"]
+ENTRYPOINT ["watchexec", "./sync.sh"]
