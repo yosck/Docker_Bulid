@@ -1,9 +1,6 @@
 # 使用最小的基底映像
 FROM alpine:latest
 
-# 安裝 watchexec 和 rclone
-RUN apk --no-cache add watchexec rclone
-
 # 設置工作目錄
 WORKDIR /data
 
@@ -12,5 +9,14 @@ ENV RCLONE_REMOTE="remote:dir"
 ENV WATCH_DIR="/data/watch"
 ENV CONFIG_FILE="/data/rclone.conf"
 
-# 設置默認命令
-ENTRYPOINT ["watchexec -r 'rclone sync --config="$CONFIG_FILE" -vP ${WATCH_DIR:-/data/watch} $RCLONE_REMOTE'"]
+# 安裝 watchexec 和 rclone
+RUN apk --no-cache add watchexec rclone
+
+# 複製腳本到容器中
+COPY rclone_watchexec/sync.sh ./
+
+# 添加執行權限
+RUN chmod +x sync.sh
+
+# 使用ENTRYPOINT來執行腳本
+ENTRYPOINT ["./sync.sh"]
