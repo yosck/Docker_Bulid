@@ -6,4 +6,4 @@ RCLONE_REMOTE="${RCLONE_REMOTE:-remote:dir}"
 CONFIG_FILE="${CONFIG_FILE:-/data/rclone.conf}"
 
 # 執行 rclone 同步命令
-rclone sync --config="$CONFIG_FILE" -vP "$WATCH_DIR" "$RCLONE_REMOTE"
+rclone sync --config="$CONFIG_FILE" --stats-one-line -vP "$WATCH_DIR" "$RCLONE_REMOTE"
