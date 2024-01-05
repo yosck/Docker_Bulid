@@ -1,5 +1,5 @@
 # 使用官方的 qBittorrent-nox 映像
-FROM qbittorrentofficial/qbittorrent-nox:latest
+FROM linuxserver/qbittorrent:latest
 
 # 安裝 curl
 RUN apk add --no-cache curl && \
