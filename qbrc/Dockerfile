@@ -1,5 +1,5 @@
 # 使用 qbittorrent-nox:latest 作為基本映像
-FROM qbittorrent-nox:latest
+FROM qbittorrentofficial/qbittorrent-nox:latest
 
 # 安裝 curl
 RUN apt-get update && \
