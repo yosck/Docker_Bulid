@@ -1,9 +1,6 @@
-# 使用 qbittorrent-nox:latest 作為基本映像
+# 使用官方的 qBittorrent-nox 映像
 FROM qbittorrentofficial/qbittorrent-nox:latest
 
 # 安裝 curl
-RUN apt-get update && \
-    apt-get install -y curl
-
-# 使用 curl 安裝 rclone
-RUN curl https://rclone.org/install.sh | bash
+RUN apk add --no-cache curl && \
+    curl https://rclone.org/install.sh | bash
