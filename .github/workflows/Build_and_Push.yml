@@ -26,7 +26,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GHCR_PAT }}
 
-    - name: Build and push Docker image rcqb
+    - name: Build and push Docker image
       run: |
         DOCKER_IMAGE_E="ghcr.io/${{ github.repository_owner }}/qbrc:latest"
         docker buildx prune --all
@@ -35,3 +35,5 @@ jobs:
 
       env:
         DOCKER_CLI_EXPERIMENTAL: enabled
+        BUILDKIT_PLATFORMS: linux/amd64,linux/arm64
+
